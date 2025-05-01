@@ -6,9 +6,10 @@
 //               operation code, and reset signal, which are used in the UVM
 //               sequences for generating ALU test vectors.
 //               
-// Author       : Omar Ashraf Abd El Mongy
-// Date         : 1/5/2025
-// Version      : 1.0
+// Project     : Verification UVM Framework for Nova ALU
+// Author      : Omar Ashraf Abd El Mongy
+// Date        : 1/5/2025
+// Version     : 1.0
 //-----------------------------------------------------------------------------
 `ifndef ALU_ITEM_BASE_SV
 `define ALU_ITEM_BASE_SV
