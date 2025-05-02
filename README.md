@@ -157,4 +157,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## ✍️ Authors
 
-Developed and maintained by [Your Name or Team Name].
+Developed and maintained by Omar Ashraf Abd El Mongy.
