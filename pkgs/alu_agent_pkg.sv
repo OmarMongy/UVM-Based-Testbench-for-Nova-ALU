@@ -17,7 +17,8 @@
 //  (UVM) environment.
 //
 //  The agent supports both active (driving) and passive (monitoring) modes
-//  and includes configuration options such as agent-level control, and built-in sequences.
+//  and includes configuration options such as agent-level control,
+//  checking assertions and built-in sequences.
 //
 //  This package is intended to be shared across different simple
 //  projects, enabling consistent verification methodology and reuse.
@@ -154,7 +155,19 @@ class alu_config extends uvm_component;
         `uvm_fatal("ALGORITHM_ISSUE", "Trying to set the ALU virtual interface more than once")
       end
     endfunction
-
+    //Setter for the Checking the assertions  
+    virtual function get_has_checks();
+      return has_checks;
+    endfunction
+    //Getter for the Checking the assertions  
+    virtual function set_has_checks(bit value);
+      	has_checks = value;
+      
+      if(vif != null) begin
+        vif.has_checks = has_checks;
+      end
+      endfunction
+	
     virtual function void start_of_simulation_phase(uvm_phase phase);
       super.start_of_simulation_phase(phase);
       
