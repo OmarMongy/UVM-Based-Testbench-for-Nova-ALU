@@ -36,24 +36,32 @@ This project provides a **Universal Verification Methodology (UVM)**-based testb
 
 ```
 alu_uvm_verif/
-├── src/
-│   ├── alu_if.sv                  # Virtual interface
-│   ├── alu_item_drv.sv            # Sequence item
-│   ├── alu_driver.sv              # Driver
-│   ├── alu_monitor.sv             # Monitor
-│   ├── alu_config.sv              # Agent/environment config
-│   ├── alu_sequencer.sv           # Sequencer
-│   ├── alu_agent.sv               # Agent
-│   ├── alu_env.sv                 # Environment
-│   ├── alu_sequence_base.sv       # Base sequence
-│   ├── alu_sequence_simple.sv     # Stimulus sequence
-│   ├── alu_sequence_reset.sv      # Reset sequence
-│   ├── alu_test_base.sv           # Base test
-│   ├── alu_basic_operations_test.sv  # Basic op test
-│   ├── alu_edge_case_test.sv      # Edge case test
-├── Makefile or sim.do             # Simulation script
-├── README.md                      # Project documentation
-└── doc/                           # Optional documentation
+├── components/
+│   ├── alu_agent.sv
+│   ├── alu_config.sv
+│   ├── alu_driver.sv
+│   ├── alu_item_base.sv
+│   ├── alu_item_drv.sv
+│   ├── alu_item_mon.sv
+│   ├── alu_monitor.sv
+│   ├── alu_sequence_base.sv
+│   ├── alu_sequence_reset.sv
+│   ├── alu_sequence_simple.sv
+│   └── alu_sequencer.sv
+├── pkgs/
+│   ├── alu_agent_pkg.sv
+│   ├── alu_env_pkg.sv
+│   └── alu_test_pkg.sv
+├── sim/
+│   └── testbench.sv
+│   └── src/
+│       ├── alu_if.sv
+│       └── nova_alu.v
+├── tests/
+│   ├── alu_basic_operations_test.sv
+│   ├── alu_edge_case_test.sv
+│   └── alu_test_base.sv
+├── README.m
 ```
 
 ---
