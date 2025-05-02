@@ -73,19 +73,23 @@ alu_uvm_verif/
 
 ## 🧩 Testbench Components
 
-| Component       | Description                                        |
-|----------------|----------------------------------------------------|
-| `alu_if`        | Defines signal-level interface for DUT            |
-| `alu_item_drv`  | Defines sequence item (stimulus transaction)      |
-| `alu_driver`    | Drives stimulus to DUT from sequencer             |
-| `alu_monitor`   | Observes DUT outputs and forwards to scoreboard   |
-| `alu_sequencer` | Controls order of stimulus to be driven           |
-| `alu_agent`     | Bundles sequencer, driver, monitor                |
-| `alu_env`       | Top-level environment holding agents              |
-| `alu_config`    | Holds configuration objects (e.g., active/passive)|
-| `alu_test_base` | Base test class with environment instantiation    |
-| `alu_sequence_*`| Various test sequences for stimulus               |
-| `*_test`        | Specific test scenarios for coverage              |
+| Component        | Description                                                |
+|------------------|------------------------------------------------------------|
+| `alu_if`         | Defines signal-level interface for DUT                     |
+| `alu_item_*`     | Defines sequence item (stimulus transaction)               |
+| `alu_driver`     | Drives stimulus to DUT from sequencer                      |
+| `alu_monitor`    | Observes DUT outputs and forwards to scoreboard            |
+| `alu_sequencer`  | Controls order of stimulus to be driven                    |
+| `alu_config`     | Holds configuration objects (e.g., active/passive)         |
+| `alu_agent`      | Bundles sequencer, driver, monitor                         |
+| `alu_scoreboard` | Collects and compares the DUT outputs with expected results|
+| `alu_coverage`   | Tracks the coverage of the design during simulation        |
+| `alu_env_config	`| Configures the environment to activate coverage and        |
+|                  | scoreboard; enables result checks and flags                |
+| `alu_env`        | Top-level environment holding agents                       |
+| `alu_test_base`  | Base test class with environment instantiation             |
+| `alu_sequence_*` | Various test sequences for stimulus                        |
+| `*_test`         | Specific test scenarios for coverage                       |
 
 ---
 
