@@ -43,9 +43,9 @@
         alu_sequence_simple seq_simple = alu_sequence_simple::type_id::create("seq_simple");
         repeat(1000) begin
           void'(seq_simple.randomize() with {
-            in1 == 100;
-            in2 == 200;
-            op  == 0;
+            in1 inside {[32'h0, 32'hFFFF_FFFF]};
+            in2 inside {[32'h0, 32'hFFFF_FFFF]};
+            op  inside {[0:7]};
           });
           env.env_config.set_chk_flg(1); // Disable internal checks if needed
           seq_simple.start(env.agent.sequencer);
