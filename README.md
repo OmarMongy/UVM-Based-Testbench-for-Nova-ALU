@@ -37,17 +37,22 @@ This project provides a **Universal Verification Methodology (UVM)**-based testb
 ```
 alu_uvm_verif/
 ├── components/
+│   ├── alu_env.sv
+│   ├── alu_scoreboard.sv
+│   ├── alu_coverage.sv
+│   ├── alu_env_config.sv
 │   ├── alu_agent.sv
 │   ├── alu_config.sv
 │   ├── alu_driver.sv
+│   ├── alu_monitor.sv
+│   └── alu_sequencer.sv
+├── objects/
 │   ├── alu_item_base.sv
 │   ├── alu_item_drv.sv
 │   ├── alu_item_mon.sv
-│   ├── alu_monitor.sv
 │   ├── alu_sequence_base.sv
 │   ├── alu_sequence_reset.sv
 │   ├── alu_sequence_simple.sv
-│   └── alu_sequencer.sv
 ├── pkgs/
 │   ├── alu_agent_pkg.sv
 │   ├── alu_env_pkg.sv
