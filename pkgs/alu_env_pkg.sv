@@ -162,10 +162,10 @@
 
     // Example Carry and Overflow calculation for ADD/SUB
     if (item.op == 4'b0000) begin  // ADD
-      exp_carry = (a + b) > 32'hFFFFFFFF;
+      exp_carry = ((a[31] & b[31]) | ((a[31] | b[31]) & ~result[31]));
       exp_overflow = ((a[31] == b[31]) && (result[31] != a[31]));
     end else if (item.op == 4'b0001) begin // SUB
-      exp_carry = (a < b);
+      exp_carry = ((a[31] & b[31]) | ((a[31] | b[31]) & ~result[31]));
       exp_overflow = ((a[31] != b[31]) && (result[31] != a[31]));
     end
   endfunction
