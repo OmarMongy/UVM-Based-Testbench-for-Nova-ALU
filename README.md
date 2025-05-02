@@ -103,7 +103,7 @@ alu_uvm_verif/
 
 ### 🔧 Compilation Setup
 
-Example using ModelSim:
+Example using QuestaSim:
 
 ```tcl
 vlib work
