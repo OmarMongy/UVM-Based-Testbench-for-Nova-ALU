@@ -51,7 +51,7 @@ module testbench;
     uvm_config_db#(virtual alu_if)::set(null, "uvm_test_top.env.agent", "vif", alu_if_tb);
 
     // Run the UVM test - specify test name here
-    run_test("alu_main_test");
+    run_test("");
   end
 
 endmodule
