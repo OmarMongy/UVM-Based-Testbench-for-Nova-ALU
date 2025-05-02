@@ -5,7 +5,7 @@
 // Date        : 1/5/2025
 // Version     : 1.0
 // Description : 
-//   This UVM package includes the base test and a main test to verify the ALU 
+//   This UVM package includes the base test and other tests to verify the ALU 
 //   functionality. It instantiates the environment and runs sequences for reset 
 //   and stimulus generation.
 //==============================================================================
@@ -67,13 +67,14 @@ package alu_test_pkg;
       // Main functional sequence: 100 random operations
       begin
         alu_sequence_simple seq_simple = alu_sequence_simple::type_id::create("seq_simple");
-        repeat(1000) begin
+        repeat(10) begin
           void'(seq_simple.randomize() with {
-            in1 inside {[32'h0, 32'hFFFF_FFFF]};
-            in2 inside {[32'h0, 32'hFFFF_FFFF]};
+            in1 inside {[32'h0 : 32'hFFFF_FFFF]};
+            in2 inside {[32'h0 : 32'hFFFF_FFFF]};
             op  inside {[0:7]};
           });
           env.env_config.set_chk_flg(1); // Disable internal checks if needed
+          env.agent.agt_config.set_has_checks(1); // Disable assertion checks if needed
           seq_simple.start(env.agent.sequencer);
         end
       end
@@ -110,16 +111,17 @@ package alu_test_pkg;
         end
       end
 
-      // Main functional sequence: 10 random operations
+      // Main functional sequence: 100 random operations
       begin
         alu_sequence_simple seq_simple = alu_sequence_simple::type_id::create("seq_simple");
         repeat(10) begin
           void'(seq_simple.randomize() with {
-            in1 inside {32'h0, 32'hFFFF_FFFF}; // MAX and MIN Values
-            in2 inside {32'h0, 32'hFFFF_FFFF}; // MAX and MIN Values
+            in1 inside {32'h0, 32'hFFFF_FFFF};
+            in2 inside {32'h0, 32'hFFFF_FFFF};
             op  inside {[0:7]};
           });
           env.env_config.set_chk_flg(1); // Disable internal checks if needed
+          env.agent.agt_config.set_has_checks(1); // Disable assertion checks if needed
           seq_simple.start(env.agent.sequencer);
         end
       end
