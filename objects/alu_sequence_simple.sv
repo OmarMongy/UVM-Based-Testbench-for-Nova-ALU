@@ -37,14 +37,14 @@ class alu_sequence_simple extends alu_sequence_base;
         // Start the item in the sequence
         start_item(item);
 
-        // Randomize the sequence item with specified constraints
+        // Constrain item fields to match sequence-level values
         if (!item.randomize() with {
-            item.rst == 1;  // Ensure reset is active
-            item.in1 inside {[0:10]};  // Operand 1 is between 0 and 10
-            item.in2 inside {[20:25]};  // Operand 2 is between 20 and 25
-            item.op  inside {[0:7]};  // Operation code is between 0 and 7
+          item.rst == 1;                      // Ensure ALU is not in reset
+          item.in1 == local::in1;             // Bind item.in1 to sequence's in1
+          item.in2 == local::in2;             // Bind item.in2 to sequence's in2
+          item.op  == local::op;              // Bind item.op to sequence's op
         }) begin
-            `uvm_error("ALU_SEQ", "Randomization failed.")  // Error if randomization fails
+          `uvm_error("ALU_SEQ", "Randomization failed.")
         end
 
         // Finish the item and notify the sequencer
