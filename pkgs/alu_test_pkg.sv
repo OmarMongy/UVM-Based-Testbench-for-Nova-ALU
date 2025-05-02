@@ -40,9 +40,9 @@ package alu_test_pkg;
     endfunction
   endclass
 
-  // Main test class extending the base test
-  class alu_main_test extends alu_test_base;
-    `uvm_component_utils(alu_main_test)
+  // Basic operations test class extending the base test
+  class alu_basic_operations_test extends alu_test_base;
+    `uvm_component_utils(alu_basic_operations_test)
 
     function new(string name = "", uvm_component parent);
       super.new(name, parent);
@@ -67,9 +67,59 @@ package alu_test_pkg;
       // Main functional sequence: 100 random operations
       begin
         alu_sequence_simple seq_simple = alu_sequence_simple::type_id::create("seq_simple");
-        repeat(100) begin
-          void'(seq_simple.randomize());
-          env.env_config.set_chk_flg(0); // Disable internal checks if needed
+        repeat(1000) begin
+          void'(seq_simple.randomize() with {
+            in1 == 100;
+            in2 == 200;
+            op  == 0;
+          });
+          env.env_config.set_chk_flg(1); // Disable internal checks if needed
+          seq_simple.start(env.agent.sequencer);
+        end
+      end
+
+      // End of test message
+      `uvm_info("DEBUG", "this is the end of the test", UVM_LOW)
+
+      // Drop objection to end simulation
+      phase.drop_objection(this, "TEST_DONE");
+    endtask
+  endclass
+
+  //  Boundary/Edge case test class extending the base test
+  class alu_edge_case_test extends alu_test_base;
+    `uvm_component_utils(alu_edge_case_test)
+
+    function new(string name = "", uvm_component parent);
+      super.new(name, parent);
+    endfunction
+
+    // Run phase for executing reset and stimulus sequences
+    virtual task run_phase(uvm_phase phase);
+      super.run_phase(phase);
+
+      // Raise objection to keep simulation alive
+      phase.raise_objection(this, "TEST_DONE");
+
+      // Reset sequence: Apply 5 randomized resets
+      begin
+        alu_sequence_reset seq_rst = alu_sequence_reset::type_id::create("seq_rst");
+        repeat(5) begin
+          void'(seq_rst.randomize());
+          seq_rst.start(env.agent.sequencer);
+        end
+      end
+
+      // Main functional sequence: 10 random operations
+      begin
+        alu_sequence_simple seq_simple = alu_sequence_simple::type_id::create("seq_simple");
+        repeat(10) begin
+          void'(seq_simple.randomize() with {
+            in1 inside {32'h0, 32'hFFFF_FFFF}; // MAX and MIN Values
+            in2 inside {32'h0, 32'hFFFF_FFFF}; // MAX and MIN Values
+            op  inside {[0:7]};
+          });
+          env.env_config.set_chk_flg(1); // Disable internal checks if needed
           seq_simple.start(env.agent.sequencer);
         end
       end
