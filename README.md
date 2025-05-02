@@ -1,6 +1,7 @@
 # Verification UVM Framework for Nova ALU
 
 ![SystemVerilog](https://img.shields.io/badge/language-SystemVerilog-blue.svg)
+![Verilog](https://img.shields.io/badge/language-Verilog-brightblue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
 
