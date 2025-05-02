@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 // File         : alu_config.sv
-// Description  : ALU Configuration Component for UVM Testbench
+// Description  : ALU Configuration Component for the Agent UVM Testbench
 //               This class defines a UVM component that manages the ALU's 
 //               configuration, including the setup of the virtual interface 
 //               (`alu_vif`) and controls for the ALU's active or passive 
