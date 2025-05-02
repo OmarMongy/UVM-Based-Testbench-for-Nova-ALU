@@ -15,11 +15,6 @@
 `ifndef ALU_SEQUENCE_SIMPLE_SV
 `define ALU_SEQUENCE_SIMPLE_SV
 
-// Import necessary UVM packages
-`include "uvm_macros.svh"
-`include "alu_item_drv.sv"
-`include "alu_sequence_base.sv"
-
 // Define the simple ALU sequence class
 class alu_sequence_simple extends alu_sequence_base;
 
