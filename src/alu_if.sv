@@ -17,8 +17,11 @@
 //   - alu_z_flag: ALU zero flag (set when the result is zero).
 //   - alu_c_flag: ALU carry-out flag (set for operations that generate a carry-out).
 //   - alu_n_flag: ALU negative flag (set when the result is negative).
-//
-// Purpose: 
+// 
+//   - Includes assertions to check some ALU operations rules:
+//    * Rule #1: ALU signals must not have unknown values (e.g., x, z).
+// 
+//   Purpose: 
 //   The interface encapsulates the ALU's I/O and control signals in a reusable and 
 //   modular form, which can be connected to the ALU component in the testbench.
 //------------------------------------------------------------------------------
@@ -26,7 +29,8 @@
 // Prevent multiple inclusions of this file
 `ifndef ALU_IF_SV
     `define ALU_IF_SV
-
+			                                                        `include "uvm_macros.svh"
+																	 import uvm_pkg::*;
     interface alu_if(input clk);
         logic        alu_rst_n;   // Active-low reset for ALU
         logic [31:0] alu_in1;     // First operand for ALU operation
@@ -37,6 +41,49 @@
         logic        alu_z_flag;  // ALU zero flag
         logic        alu_c_flag;  // ALU carry-out flag
         logic        alu_n_flag;  // ALU negative flag
-    endinterface
 
+        bit          has_checks; //Checking Assertions
+
+    //Rule #1: ALU signals must not have unknown values (e.g., x, z).
+    property unknown_value_alu_out;    
+      @(posedge clk) disable iff(!alu_rst_n || !has_checks)
+      $isunknown(alu_out) == 0;
+    endproperty     
+    
+    UNKNOWN_VALUE_ALU_OUT : assert property(unknown_value_alu_out) else
+        `uvm_error("ASSERTION ERROR", "DETECTED UNKNOWN VALUE FOR ALU SIGNAL ALU_OUT!")  
+   
+    property unknown_value_alu_v_flag;    
+      @(posedge clk) disable iff(!alu_rst_n || !has_checks)
+      $isunknown(alu_v_flag) == 0;
+    endproperty     
+    
+    UNKNOWN_VALUE_ALU_V_FLAG : assert property(unknown_value_alu_v_flag) else
+        `uvm_error("ASSERTION ERROR", "DETECTED UNKNOWN VALUE FOR ALU SIGNAL ALU_V_FLAG!") 
+    
+    property unknown_value_alu_z_flag;    
+      @(posedge clk) disable iff(!alu_rst_n || !has_checks)
+      $isunknown(alu_z_flag) == 0;
+    endproperty     
+    
+    UNKNOWN_VALUE_ALU_Z_FLAG : assert property(unknown_value_alu_z_flag) else
+        `uvm_error("ASSERTION ERROR", "DETECTED UNKNOWN VALUE FOR ALU SIGNAL ALU_Z_FLAG!") 
+    
+    property unknown_value_alu_c_flag;    
+      @(posedge clk) disable iff(!alu_rst_n || !has_checks)
+      $isunknown(alu_c_flag) == 0;
+    endproperty     
+    
+    UNKNOWN_VALUE_ALU_C_FLAG : assert property(unknown_value_alu_c_flag) else
+        `uvm_error("ASSERTION ERROR", "DETECTED UNKNOWN VALUE FOR ALU SIGNAL ALU_C_FLAG!") 
+    
+    property unknown_value_alu_n_flag;    
+      @(posedge clk) disable iff(!alu_rst_n || !has_checks)
+      $isunknown(alu_n_flag) == 0;
+    endproperty     
+    
+    UNKNOWN_VALUE_ALU_N_FLAG : assert property(unknown_value_alu_n_flag) else
+        `uvm_error("ASSERTION ERROR", "DETECTED UNKNOWN VALUE FOR ALU SIGNAL ALU_N_FLAG!") 
+                                
+    endinterface
 `endif
