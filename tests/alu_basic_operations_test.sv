@@ -48,6 +48,7 @@
             op  inside {[0:7]};
           });
           env.env_config.set_chk_flg(1); // Disable internal checks if needed
+          env.agent.agt_config.set_has_checks(1); // Disable assertion checks if needed
           seq_simple.start(env.agent.sequencer);
         end
       end
