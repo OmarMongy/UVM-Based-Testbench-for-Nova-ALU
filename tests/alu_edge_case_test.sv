@@ -45,7 +45,7 @@
       // Main functional sequence: 100 random operations
       begin
         alu_sequence_simple seq_simple = alu_sequence_simple::type_id::create("seq_simple");
-        repeat(10) begin
+        repeat(100) begin
           void'(seq_simple.randomize() with {
             in1 inside {32'h0, 32'hFFFF_FFFF};
             in2 inside {32'h0, 32'hFFFF_FFFF};
